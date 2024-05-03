@@ -1,5 +1,6 @@
 package com.skd.javaeightfeatures;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class OptionalCalssExample {
@@ -22,14 +23,27 @@ public class OptionalCalssExample {
 			String getName=validateName.get();
 			System.out.println(getName);
 		}
-		
+
+//		filter is used to filter the value as per required.
+//		map is used to perform task and return the value again.
+//		orElse is used if value not their in optional container it will supply value as per required.
 		String finalOutput=validateName.filter((nameValidation)-> {
 			if(nameValidation.equalsIgnoreCase("Pavan Kalyan"))
 				return true;
 			else 
 				return false;
 		}).map(x -> x).orElse("Name Not Matched");
-		
 		System.out.println(finalOutput);
+		
+//		ifPresent consume the value
+		validateName.ifPresent(output -> System.out.println(output));
+		
+//		orElseThrow will throw the exception when value is null.
+//		Optional.ofNullable(null).map(output -> output).orElseThrow(() -> new NoSuchElementException());
+		
+//		orElseGet will return the value if value is null or not present in optional container.
+		Object value=Optional.ofNullable(null).orElseGet(()-> "No Value Present");
+		System.out.println(value);
+		
 	}
 }
