@@ -54,15 +54,27 @@ public class StreamApiExample {
 		// listOfStudent.forEach(System.out::println);
 
 		/**
-		 * Student Who starts with name 'P' by using Stream API.
+		 * Student Who's name start's with 'P' by using Stream API.
 		 */
-		List<Student> listOfStudWithNameP = listOfStudent.stream().filter(studentObject -> {
-			if (studentObject.getStuName().startsWith("P")) {
-				return true;
-			}
-			return false;
-		}).collect(Collectors.toList());
+		List<Student> listOfStudWithNameP = listOfStudent.stream()
+				.filter(studentObject -> studentObject.getStuName().startsWith("P")).collect(Collectors.toList());
+
+//		listOfStudWithNameP.forEach(System.out::println);
+
+		/**
+		 * Student Who's name End's with 'M' by using Stream API.
+		 */
+		List<Student> listOfStudWithNameM = listOfStudent.stream()
+				.filter(studentObject -> studentObject.getStuName().endsWith("m")).collect(Collectors.toList());
 		
-		listOfStudWithNameP.forEach(System.out::println);
+//		listOfStudWithNameM.forEach(System.out::println);
+		
+		/**
+		 * Student's that who are in 2nd Class
+		 */
+		List<Student> listOfStudInSecondClass = listOfStudent.stream()
+				.filter(studentObject -> studentObject.getStudClass()==2).collect(Collectors.toList());
+		
+		listOfStudInSecondClass.forEach(System.out::println);
 	}
 }
