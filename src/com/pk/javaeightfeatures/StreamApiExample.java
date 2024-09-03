@@ -2,6 +2,7 @@ package com.pk.javaeightfeatures;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 class Student {
@@ -59,22 +60,39 @@ public class StreamApiExample {
 		List<Student> listOfStudWithNameP = listOfStudent.stream()
 				.filter(studentObject -> studentObject.getStuName().startsWith("P")).collect(Collectors.toList());
 
-//		listOfStudWithNameP.forEach(System.out::println);
+		// listOfStudWithNameP.forEach(System.out::println);
 
 		/**
 		 * Student Who's name End's with 'M' by using Stream API.
 		 */
 		List<Student> listOfStudWithNameM = listOfStudent.stream()
 				.filter(studentObject -> studentObject.getStuName().endsWith("m")).collect(Collectors.toList());
-		
-//		listOfStudWithNameM.forEach(System.out::println);
-		
+
+		// listOfStudWithNameM.forEach(System.out::println);
+
 		/**
 		 * Student's that who are in 2nd Class
 		 */
 		List<Student> listOfStudInSecondClass = listOfStudent.stream()
-				.filter(studentObject -> studentObject.getStudClass()==2).collect(Collectors.toList());
-		
-		listOfStudInSecondClass.forEach(System.out::println);
+				.filter(studentObject -> studentObject.getStudClass() == 2).collect(Collectors.toList());
+
+		// listOfStudInSecondClass.forEach(System.out::println);
+
+		/**
+		 * Converting Students Names to UpperCase.
+		 */
+		listOfStudent.stream().map((studentObject) -> studentObject.getStuName().toUpperCase())
+				.collect(Collectors.toList()).forEach(System.out::println);
+
+		/**
+		 * Grouping By students By Their Id's.
+		 */
+		Map<Long, List<Student>> gropuBy = listOfStudent.stream()
+				.collect(Collectors.groupingBy((studentObject) -> studentObject.getStuId()));
+
+		gropuBy.forEach((studId, listOfStudents) -> {
+			System.out.println(studId);
+			listOfStudents.forEach(System.out::println);
+		});
 	}
 }
